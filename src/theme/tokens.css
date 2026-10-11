@@ -1,0 +1,24 @@
+:root {
+  --color-bg: #0a0d0a;
+  --color-surface: #111611;
+  --color-border: #1f3a24;
+  --color-text: #c8f7c5;
+  --color-muted: #7fa883;
+  --color-accent: #39ff6a;
+  --color-accent-ink: #041a08;
+  --color-danger: #ff3b3b;
+
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-heading: var(--font-mono);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --radius: 4px;
+  --tap: 48px;
+  --text-base: 18px;
+}
