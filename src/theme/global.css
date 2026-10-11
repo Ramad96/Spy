@@ -299,6 +299,11 @@ body {
   font: inherit;
 }
 
+.dossier {
+  position: relative;
+  overflow: hidden;
+}
+
 .pass-card {
   cursor: pointer;
   touch-action: manipulation;

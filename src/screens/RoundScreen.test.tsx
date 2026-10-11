@@ -17,7 +17,7 @@ test('shows who goes first and keeps spies hidden until held', () => {
   render(
     <RoundScreen players={players} round={round} onNewMission={vi.fn()} onBackToSetup={vi.fn()} />,
   );
-  expect(screen.getByText(/all agents briefed/i)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: /all agents briefed/i })).toBeInTheDocument();
   expect(screen.getByText('Cal')).toBeInTheDocument();
   expect(screen.queryByText('Ben')).not.toBeInTheDocument();
   expect(screen.queryByText('Pizza')).not.toBeInTheDocument();

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { CATEGORY_LABELS, type Player, type Round } from '../core';
 import { HoldButton } from '../components/HoldButton';
+import { Typewriter } from '../components/Typewriter';
+import { playSound } from '../theme/sound';
 
 interface RoundScreenProps {
   players: Player[];
@@ -19,7 +21,7 @@ export function RoundScreen({ players, round, onNewMission, onBackToSetup }: Rou
     <div className="screen round-screen">
       <header className="screen-header">
         <p className="eyebrow">Briefing complete</p>
-        <h1 className="title">All agents briefed</h1>
+        <Typewriter as="h1" className="title" text="All agents briefed" />
         <p className="lead">Mission begins.</p>
       </header>
 
@@ -53,7 +55,13 @@ export function RoundScreen({ players, round, onNewMission, onBackToSetup }: Rou
             </p>
           </div>
         ) : (
-          <HoldButton className="btn-block btn-danger" onConfirm={() => setRevealed(true)}>
+          <HoldButton
+            className="btn-block btn-danger"
+            onConfirm={() => {
+              playSound('alarm');
+              setRevealed(true);
+            }}
+          >
             Hold to reveal {spies.length > 1 ? 'spies' : 'spy'}
           </HoldButton>
         )}

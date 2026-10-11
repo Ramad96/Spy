@@ -8,7 +8,9 @@ import {
   type Settings,
 } from '../core';
 import { PlayerList } from '../components/PlayerList';
+import { SoundToggle } from '../components/SoundToggle';
 import { Stepper } from '../components/Stepper';
+import { Typewriter } from '../components/Typewriter';
 import { newId } from '../state/storage';
 
 interface SetupScreenProps {
@@ -90,8 +92,11 @@ export function SetupScreen({ settings, onChange, onStart }: SetupScreenProps) {
   return (
     <div className="screen setup-screen">
       <header className="screen-header">
-        <p className="eyebrow">Spy // Mission control</p>
-        <h1 className="title">Mission setup</h1>
+        <div className="row-between">
+          <p className="eyebrow">Spy HQ // Control</p>
+          <SoundToggle />
+        </div>
+        <Typewriter as="h1" className="title" text="Mission setup" />
       </header>
 
       <section className="panel" aria-labelledby="agents-heading">

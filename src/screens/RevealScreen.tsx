@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Player, Round } from '../core';
 import { Scramble } from '../components/Scramble';
 import { useBlockBack } from '../state/useBlockBack';
+import { playSound } from '../theme/sound';
 
 interface RevealScreenProps {
   players: Player[];
@@ -59,7 +60,14 @@ export function RevealScreen({ players, round, onComplete, onAbort }: RevealScre
       </header>
 
       {step === 'pass' ? (
-        <button type="button" className="pass-card" onClick={() => setStep('revealing')}>
+        <button
+          type="button"
+          className="pass-card"
+          onClick={() => {
+            playSound('typing');
+            setStep('revealing');
+          }}
+        >
           <span className="eyebrow">Pass to</span>
           <span className="pass-name">{player.name}</span>
           <Scramble text={null} className="scramble-lg" />
@@ -67,12 +75,21 @@ export function RevealScreen({ players, round, onComplete, onAbort }: RevealScre
         </button>
       ) : (
         <section className="dossier" aria-live="polite">
+          {step === 'revealed' && (
+            <span className="stamp" aria-hidden="true">
+              Classified
+            </span>
+          )}
           <p className="eyebrow">{player.name} // Eyes only</p>
           <Scramble
             text={showing ? (isSpy ? SPY_HEADLINE : round.word) : null}
             glitch={isSpy}
             className={`scramble-lg${isSpy ? ' scramble-spy' : ''}`}
-            onDone={() => setStep((s) => (s === 'revealing' ? 'revealed' : s))}
+            onDone={() => {
+              if (step !== 'revealing') return;
+              playSound(isSpy ? 'alarm' : 'beep');
+              setStep('revealed');
+            }}
           />
           {step === 'revealed' &&
             (isSpy ? (

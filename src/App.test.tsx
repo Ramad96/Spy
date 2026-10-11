@@ -120,7 +120,7 @@ test('three missions can be played in a row without going back to setup', async 
         screen.getByRole('button', { name: i === 3 ? 'Finish briefing' : 'Next player' }),
       );
     }
-    expect(screen.getByText(/all agents briefed/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /all agents briefed/i })).toBeInTheDocument();
     if (mission < 2) await user.click(screen.getByRole('button', { name: 'New mission' }));
   }
   // Each mission dealt a different word.

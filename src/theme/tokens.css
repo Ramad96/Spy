@@ -1,15 +1,21 @@
+/* Secret agent HQ: every colour, font and size the screens use lives here. */
 :root {
-  --color-bg: #0a0d0a;
-  --color-surface: #111611;
+  --color-bg: #070a07;
+  --color-surface: #0d130d;
+  --color-surface-raised: #122012;
   --color-border: #1f3a24;
-  --color-text: #c8f7c5;
-  --color-muted: #7fa883;
+  --color-text: #d4fbd1;
+  --color-muted: #86b08a;
   --color-accent: #39ff6a;
-  --color-accent-ink: #041a08;
+  --color-accent-ink: #031405;
+  --color-amber: #ffb000;
   --color-danger: #ff3b3b;
+  --color-danger-glow: rgba(255, 59, 59, 0.45);
+  --color-glow: rgba(57, 255, 106, 0.35);
+  --color-scanline: rgba(0, 0, 0, 0.28);
 
-  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
-  --font-heading: var(--font-mono);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-heading: 'Stardos Stencil', 'JetBrains Mono', ui-monospace, monospace;
 
   --space-1: 4px;
   --space-2: 8px;
@@ -21,4 +27,7 @@
   --radius: 4px;
   --tap: 48px;
   --text-base: 18px;
+
+  --glow-text: 0 0 6px var(--color-glow);
+  --glow-danger: 0 0 8px var(--color-danger-glow);
 }
