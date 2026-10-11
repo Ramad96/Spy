@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { startRound, type Round, type Settings } from './core';
 import { RevealScreen } from './screens/RevealScreen';
+import { RoundScreen } from './screens/RoundScreen';
 import { SetupScreen } from './screens/SetupScreen';
 import { loadSettings, loadUsedWords, saveSettings, saveUsedWords } from './state/storage';
 
@@ -38,12 +39,13 @@ export default function App() {
         />
       )}
       {screen.name === 'round' && (
-        <div className="screen">
-          <h1 className="title">All agents briefed</h1>
-          <button type="button" className="btn" onClick={backToSetup}>
-            Back to setup
-          </button>
-        </div>
+        <RoundScreen
+          key={screen.id}
+          players={settings.players}
+          round={screen.round}
+          onNewMission={newMission}
+          onBackToSetup={backToSetup}
+        />
       )}
     </main>
   );

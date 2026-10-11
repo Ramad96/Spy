@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import App from './App';
+import { mockReducedMotion } from './test-utils';
 
 beforeEach(() => localStorage.clear());
 
@@ -98,4 +100,33 @@ test('broken saved data falls back to defaults', () => {
   render(<App />);
   expect(screen.getByRole('button', { name: 'Start mission' })).toBeDisabled();
   expect(screen.getByRole('checkbox', { name: 'Sports' })).toBeChecked();
+});
+
+test('three missions can be played in a row without going back to setup', async () => {
+  mockReducedMotion(true);
+  const user = userEvent.setup();
+  render(<App />);
+  await addAgents(user, ['Ana', 'Ben', 'Cal', 'Dee']);
+  await user.click(screen.getByRole('button', { name: 'Start mission' }));
+
+  const words = new Set<string>();
+  for (let mission = 0; mission < 3; mission++) {
+    for (let i = 0; i < 4; i++) {
+      await user.click(screen.getByRole('button', { name: /tap to decrypt/i }));
+      const shown = document.querySelector('.scramble')!.textContent!;
+      if (shown !== 'ACCESS DENIED') words.add(shown);
+      await user.click(screen.getByRole('button', { name: 'Word secured' }));
+      await user.click(
+        screen.getByRole('button', { name: i === 3 ? 'Finish briefing' : 'Next player' }),
+      );
+    }
+    expect(screen.getByText(/all agents briefed/i)).toBeInTheDocument();
+    if (mission < 2) await user.click(screen.getByRole('button', { name: 'New mission' }));
+  }
+  // Each mission dealt a different word.
+  expect(words.size).toBe(3);
+
+  await user.click(screen.getByRole('button', { name: 'Back to setup' }));
+  expect(screen.getByRole('heading', { name: 'Mission setup' })).toBeInTheDocument();
+  vi.unstubAllGlobals();
 });

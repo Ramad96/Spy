@@ -356,3 +356,68 @@ body {
   color: var(--color-text);
   font-size: 1.4rem;
 }
+
+.lead {
+  margin: var(--space-1) 0 0;
+  font-size: 1.2rem;
+}
+
+.first-name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 10vw, 3rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  word-break: break-word;
+}
+
+.btn-danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.hold-btn {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.hold-fill {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0.25;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.hold-btn.is-holding .hold-fill {
+  transform: scaleX(1);
+  transition: transform var(--hold-ms) linear;
+}
+
+.hold-label {
+  position: relative;
+}
+
+.debrief {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.spy-names {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-danger);
+  text-transform: uppercase;
+}
+
+.debrief-word {
+  color: var(--color-text);
+}
