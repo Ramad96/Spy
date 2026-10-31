@@ -2,7 +2,7 @@
 
 A pass-the-phone party game of secret words and hidden spies. No server, no accounts, works offline.
 
-Live at **https://spy.amanahdigital.co.uk**
+Live at **https://amanahdigital.co.uk/games/spy/**
 
 See [docs/RULES.md](docs/RULES.md) for the rules and [AGENTS.md](AGENTS.md) for development notes.
 
@@ -19,15 +19,9 @@ npm run preview # serve the production build
 
 ## Deploy
 
-Every push to `main` runs `.github/workflows/deploy.yml`: lint, test, build, then publish `dist/` to GitHub Pages.
-`public/CNAME` sets the custom domain.
-
-One-time setup:
-
-1. **GitHub → Settings → Pages:** Source = **GitHub Actions**, custom domain = `spy.amanahdigital.co.uk`.
-2. **DNS (Cloudflare, amanahdigital.co.uk):** add a `CNAME` record `spy` → `ramad96.github.io`.
-   Set it to **DNS only** (grey cloud) so GitHub can issue the HTTPS certificate.
-3. Once the certificate is issued, tick **Enforce HTTPS** in the Pages settings.
+Every push to `main` runs `.github/workflows/deploy.yml`: lint, test, build, then publish `dist/` to GitHub Pages
+(`ramad96.github.io/Spy/`, no custom domain). The main site's Worker (`AmanahDigitalHome/worker.js`) serves that
+build at `amanahdigital.co.uk/games/spy/`, which is why `vite.config.ts` uses base `/games/spy/`.
 
 ## Install on a phone
 

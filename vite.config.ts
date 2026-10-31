@@ -3,9 +3,9 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
-// Served from the root of spy.amanahdigital.co.uk (GitHub Pages custom domain).
+// Served at amanahdigital.co.uk/games/spy/ (the main site's Worker proxies GitHub Pages).
 export default defineConfig({
-  base: '/',
+  base: '/games/spy/',
   plugins: [
     react(),
     VitePWA({
@@ -16,9 +16,9 @@ export default defineConfig({
         name: 'Spy – Pass the phone',
         short_name: 'Spy',
         description: 'A pass-the-phone party game of secret words and hidden spies.',
-        id: '/',
-        start_url: '/',
-        scope: '/',
+        id: '/games/spy/',
+        start_url: '/games/spy/',
+        scope: '/games/spy/',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#070a07',
@@ -37,7 +37,7 @@ export default defineConfig({
       workbox: {
         // Everything the game needs is precached, so it plays with no connection.
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
-        navigateFallback: '/index.html',
+        navigateFallback: '/games/spy/index.html',
         cleanupOutdatedCaches: true,
       },
     }),
